@@ -1,23 +1,40 @@
 import * as React from 'react';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
 type Props = Partial<{
   theme: any;
   children: any;
+  position: 'top' | 'bottom';
+  sticky: boolean;
+  fixed: boolean;
   showBrand: boolean;
   showUser: boolean;
 }>;
 
-type RenderChildren = (props: Props) => JSX.Element;
+type CompoundProps = Props & {
+  left?: boolean;
+  right?: boolean;
+  center?: boolean;
+};
 
-// const SNavbar = styled.div`
-//   font-family: ${(props: Props) => props.theme.typography.fontFamily};
-// `;
+type RenderChildren = (props: CompoundProps) => JSX.Element;
 
-// const defaultProps = {
-//   showBrand: false,
-//   showUser: false,
-// };
+const SNavbar = styled.div`
+  font-family: ${(props: Props) => props.theme.typography.fontFamily};
+  position: ${(props: Props) =>
+    props.fixed ? 'absolute' : props.sticky ? 'sticky' : 'relative'};
+  position: ${(props: Props) =>
+    props.fixed ? 'absolute' : props.sticky ? '-webkit-sticky' : 'relative'};
+  top: 0;
+  background: ${(props: Props) => props.theme.nav.background};
+  color: ${(props: Props) => props.theme.nav.color};
+  height: ${(props: Props) => props.theme.nav.height};
+  .navbar-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+`;
 
 const NavbarConsumer = (props: Props) => {
   return (
@@ -39,20 +56,28 @@ const NavbarContext = React.createContext<Props | null>(null);
 export class Navbar extends React.Component<Props> {
   static Brand: RenderChildren = ({ children }) => (
     <NavbarConsumer>
-      {(contextValue: Props) =>
-        contextValue && contextValue.showBrand ? children : null
+      {(contextValue: CompoundProps) =>
+        contextValue && contextValue.showBrand ? (
+          <div className="navbar-brand">{children}</div>
+        ) : null
       }
     </NavbarConsumer>
   )
   static User: RenderChildren = ({ children }) => (
     <NavbarConsumer>
-      {(contextValue: Props) =>
-        contextValue && contextValue.showUser ? children : null
+      {(contextValue: CompoundProps) =>
+        contextValue && contextValue.showUser ? (
+          <div className="navbar-user">{children}</div>
+        ) : null
       }
     </NavbarConsumer>
   )
-  static Menu: RenderChildren = ({ children }) => children;
-  static Link: RenderChildren = ({ children }) => children;
+  static Menu: RenderChildren = ({ children }) => (
+    <div className="navbar-menu">{children}</div>
+  )
+  static Link: RenderChildren = ({ children }) => (
+    <div className="navbar-link">{children}</div>
+  )
 
   public render() {
     // event handlers should be placed in state to prevent unnecessary
@@ -64,7 +89,9 @@ export class Navbar extends React.Component<Props> {
           showUser: this.props.showUser,
         }}
       >
-        {this.props.children}
+        <SNavbar className="navbar" {...this.props}>
+          {this.props.children}
+        </SNavbar>
       </NavbarContext.Provider>
     );
   }

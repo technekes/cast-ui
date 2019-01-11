@@ -18,8 +18,8 @@ storiesOf('Navbar', module).add(
   ~~~js
   <Navbar />
   ~~~`)(() => (
-    <Navbar showBrand={true} showUser={true}>
-      <Navbar.Brand>Logo</Navbar.Brand>
+    <Navbar sticky>
+      <Navbar.Brand left={true}>Logo</Navbar.Brand>
       <Navbar.Menu>
         <Navbar.Link>Link 1</Navbar.Link>
         <Navbar.Link>Link 2</Navbar.Link>

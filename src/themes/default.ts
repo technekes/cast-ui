@@ -1,4 +1,5 @@
 import { lighten, darken } from '../utils/colorUtils';
+import { colors } from 'react-select/lib/theme';
 
 export const defaultColors = {
   blue: '#0985E3',
@@ -92,6 +93,14 @@ export const defaultTheme = {
     borderColor: defaultColors.gray,
     color: defaultColors.darkGray,
     padding: '.375rem .75rem',
+  },
+  nav: {
+    background: colors.primary,
+    color: defaultColors.white,
+    height: '50px',
+    brand: {
+      color: defaultColors.white,
+    },
   },
   common: {
     sm: {
