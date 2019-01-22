@@ -22,6 +22,12 @@ type Props = {
    **/
   disabled?: boolean;
   /**
+   * Specify if the button is in a button group
+   *
+   * @default false
+   **/
+  inButtonGroup?: boolean;
+  /**
    * Specify if the button is selected
    *
    * @default false
@@ -36,19 +42,24 @@ type Props = {
 };
 
 const SButton = styled.button`
-  background: ${(props: Props) => props.selected ?
-    props.theme.styles[props.btnStyle].selectedFlood : props.theme.styles[props.btnStyle].flood}
+  background: ${(props: Props) => props.inButtonGroup ? (props.selected ?
+      props.theme.styles[props.btnStyle].selectedFlood
+      : props.theme.styles[props.btnStyle].unselectedFlood)
+    : props.theme.styles[props.btnStyle].flood}
   border: 1px solid ${(props: Props) =>
     props.theme.styles[props.btnStyle].borderColor};
   padding: ${(props: Props) => props.theme.common[props.btnSize].padding}
   font-family: ${(props: Props) => props.theme.typography.fontFamily};
   font-size: ${(props: Props) => props.theme.common[props.btnSize].fontSize}
   font-weight: bold;
-  color: ${(props: Props) => props.theme.styles[props.btnStyle].reverseText};
+  color: ${(props: Props) => props.inButtonGroup && !props.selected
+    ? props.theme.styles[props.btnStyle].text
+    : props.theme.styles[props.btnStyle].reverseText};
   &:hover {
     background: ${(props: Props) => props.theme.styles[props.btnStyle].hoverFlood};
     border: 1px solid ${(props: Props) =>
       props.theme.styles[props.btnStyle].hoverFlood};
+    color: ${(props: Props) => props.theme.styles[props.btnStyle].reverseText};
     cursor: pointer;
   }
   &:disabled {

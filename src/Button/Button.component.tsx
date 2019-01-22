@@ -23,6 +23,12 @@ type Props = {
    **/
   disabled?: boolean;
   /**
+   * Specify if the button is in a button group
+   *
+   * @default false
+   **/
+  inButtonGroup?: boolean;
+  /**
    * Specify if the button is selected
    *
    * @default false
@@ -51,6 +57,7 @@ export const Button: React.FunctionComponent<Props> = ({
   children,
   btnStyle = 'default',
   btnSize = 'md',
+  inButtonGroup,
   theme,
 }) => (
   <SButton
@@ -59,6 +66,7 @@ export const Button: React.FunctionComponent<Props> = ({
     theme={theme}
     disabled={disabled}
     selected={selected}
+    inButtonGroup={inButtonGroup}
     onClick={!disabled ? onClick : noop}
   >
     {children}
