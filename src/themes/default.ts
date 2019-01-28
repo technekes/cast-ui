@@ -150,26 +150,10 @@ export const defaultTheme = {
   },
   layout: {
     breakpoints: {
-      xs: {
-        min: '0px',
-        max: '575px',
-      },
-      sm: {
-        min: '576px',
-        max: '767px',
-      },
-      md: {
-        min: '768px',
-        max: '992px',
-      },
-      lg: {
-        min: '993px',
-        max: '1199px',
-      },
-      xl: {
-        min: '1200px',
-        max: '',
-      },
+      sm: '576px',
+      md: '768px',
+      lg: '993px',
+      xl: '1200px',
     }
   },
   common: {
