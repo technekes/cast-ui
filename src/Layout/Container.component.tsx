@@ -17,10 +17,28 @@ type Props = {
 };
 
 const SContainer = styled.div`
-  width: ${(props: Props) => `${props.size}px`}
-  height: ${(props: Props) => `${props.size}px`};
-  position: relative;
-  margin: 100px auto;
+  width: 100%;
+  height: auto;
+
+  @media (min-width: ${(props: Props) => props.theme.layout.breakpoints.sm}) {
+    max-width: ${(props: Props) =>
+      `${props.fluid ? '100%' : props.theme.layout.breakpoints.sm}`};
+  }
+
+  @media (min-width: ${(props: Props) => props.theme.layout.breakpoints.md}) {
+    max-width: ${(props: Props) =>
+      `${props.fluid ? '100%' : props.theme.layout.breakpoints.md}`};
+  }
+
+  @media (min-width: ${(props: Props) => props.theme.layout.breakpoints.lg}) {
+    max-width: ${(props: Props) =>
+      `${props.fluid ? '100%' : props.theme.layout.breakpoints.lg}`};
+  }
+
+  @media (min-width: ${(props: Props) => props.theme.layout.breakpoints.xl}) {
+    max-width: ${(props: Props) =>
+      `${props.fluid ? '100%' : props.theme.layout.breakpoints.xl}`};
+  }
 `;
 
 export const Container: React.FunctionComponent<Props> = ({

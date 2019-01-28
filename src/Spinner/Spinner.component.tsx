@@ -35,7 +35,7 @@ type Props = {
 };
 
 const SSpinner = styled.div`
-  width: ${(props: Props) => `${props.size}px`}
+  width: ${(props: Props) => `${props.size}px`};
   height: ${(props: Props) => `${props.size}px`};
   position: relative;
   margin: 100px auto;

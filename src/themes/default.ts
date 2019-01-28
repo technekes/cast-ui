@@ -154,7 +154,21 @@ export const defaultTheme = {
       md: '768px',
       lg: '993px',
       xl: '1200px',
-    }
+    },
+    fluidWidths: {
+      xs: '100%',
+      sm: '540px',
+      md: '720px',
+      lg: '960px',
+      xl: '1140px',
+    },
+    gutters: {
+      xs: '10px',
+      sm: '12px',
+      md: '14px',
+      lg: '16px',
+      xl: '18px',
+    },
   },
   common: {
     sm: {
