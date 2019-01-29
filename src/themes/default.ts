@@ -163,11 +163,11 @@ export const defaultTheme = {
       xl: '1140px',
     },
     gutters: {
-      xs: '10px',
-      sm: '12px',
-      md: '14px',
-      lg: '16px',
-      xl: '18px',
+      xs: '12px',
+      sm: '14px',
+      md: '16px',
+      lg: '18px',
+      xl: '20px',
     },
   },
   common: {
