@@ -24,6 +24,11 @@ storiesOf('Layout', module).add(
     <Container fluid={boolean('Fluid', true)}>
       <Row>
         <Column>We have more coming up</Column>
+        <Column>We have more coming up</Column>
+      </Row>
+      <Row>
+        <Column>We have more coming up</Column>
+        <Column>We have more coming up</Column>
       </Row>
     </Container>
   )),
