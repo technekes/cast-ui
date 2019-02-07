@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import SPaginationButton from '../Table/SPaginationButton';
-import SPaginationButtonNextPrev from '../Table/SPaginationButtonNextPrev';
+import SPaginationButton from './SPaginationButton';
+import SPaginationButtonNextPrev from './SPaginationButtonNextPrev';
 
 type Props = {
   /**

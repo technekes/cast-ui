@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { boolean, number, select } from '@storybook/addon-knobs/react';
 import Table from './Table.component';
 import { wInfo } from '../storybook-utils';
-import * as SampleData from './sampleData.json';
-import * as ColumnDefs from './sampleColumnDefs.json';
+import { SampleData } from './sampleData';
+import { ColumnDefs } from './sampleColumnDefs';
 
 storiesOf('Table', module).add(
   'Table',
@@ -38,7 +38,8 @@ storiesOf('Table', module).add(
   </Table>
   ~~~`)(() => {
     return (
-      <Table data={SampleData.Customers}
+      <Table
+        data={SampleData.Customers}
         columns={ColumnDefs}
         inputSize={select('inputSize', ['sm', 'md', 'lg'], 'md')}
         showPagination={boolean('showPagination', true)}
@@ -56,8 +57,7 @@ storiesOf('Table', module).add(
         resizable={boolean('resizable', true)}
         sortable={boolean('sortable', true)}
         multiSort={boolean('multiSort', true)}
-      >
-    </Table>
+      />
     );
   }),
 );

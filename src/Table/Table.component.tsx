@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import ReactTable from 'react-table';
-import TablePagination from '../TablePagination/TablePagination.component';
+import Pagination from '../Pagination/Pagination.component';
 import 'react-table/react-table.css';
 
 type Props = {
@@ -179,7 +179,7 @@ class Table extends React.Component<Props> {
     return (
       <SWrapperDiv {...this.props}>
         <ReactTable
-          PaginationComponent={TablePagination}
+          PaginationComponent={Pagination}
           data={this.props.data}
           columns={this.props.columns}
           showPagination={this.props.showPagination}

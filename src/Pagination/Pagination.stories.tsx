@@ -2,13 +2,13 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { number, select, text } from '@storybook/addon-knobs/react';
 import { action } from '@storybook/addon-actions';
-import TablePagination from './TablePagination.component';
+import Pagination from './Pagination.component';
 import { wInfo } from '../storybook-utils';
-import SPaginationButton from '../Table/SPaginationButton';
-import SPaginationButtonNextPrev from '../Table/SPaginationButtonNextPrev';
+import SPaginationButton from './SPaginationButton';
+import SPaginationButtonNextPrev from './SPaginationButtonNextPrev';
 
-storiesOf('Table', module).add(
-  'TablePagination',
+storiesOf('Pagination', module).add(
+  'Pagination',
   wInfo(`
 
   ### Notes
@@ -17,9 +17,10 @@ storiesOf('Table', module).add(
 
   ### Usage
   ~~~js
-  <TablePagination
+  <Pagination
     btnSize='md'
     nextText='Next'
+    onPageChange={action('Page changed!')}
     onPageChange={action('Page changed!')}
     pages={10}
     page={0}
@@ -27,10 +28,10 @@ storiesOf('Table', module).add(
     PageButtonNextPrevComponent={SPaginationButtonNextPrev}
     previousText='Previous'
   >
-  </TablePagination>
+  </Pagination>
   ~~~`)(() => {
     return (
-      <TablePagination
+      <Pagination
         btnSize={select('btnSize', ['sm', 'md', 'lg'], 'md')}
         nextText={text('nextText', 'Next')}
         onPageChange={action('Page changed!')}
