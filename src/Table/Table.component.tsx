@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import ReactTable from 'react-table';
 import Pagination from '../Pagination/Pagination.component';
+import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 type Props = {
