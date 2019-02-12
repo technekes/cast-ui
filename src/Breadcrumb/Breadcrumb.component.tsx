@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 // Import Utilities
-import CrumbsStore from './store';
+// import CrumbsStore from './store';
 
 type Props = {
   /**
@@ -97,11 +97,10 @@ export class Breadcrumb extends React.Component<Props> {
    * @param  {object} data   - The breadcrumb data to pass
    */
   dispatchCrumb(action: any, data: any) {
-    const { id } = this.state;
-
-    CrumbsStore().dispatch({
-      type: action,
-      payload: { id, ...data },
-    });
+    // const { id } = this.state;
+    // CrumbsStore().dispatch({
+    //   type: action,
+    //   payload: { id, ...data },
+    // });
   }
 }

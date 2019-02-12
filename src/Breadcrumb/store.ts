@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function reducer(state: any, action: any) {
+export function reducer(state: any, action: any) {
   switch (action.type) {
     case 'ADD_CRUMB':
       return [...state, action.payload];
@@ -17,10 +17,10 @@ function reducer(state: any, action: any) {
   }
 }
 
-export const CrumbsStore = () => {
+export function CrumbsStore() {
   let [state, dispatch] = React.useReducer(reducer, []);
   return { state, dispatch };
-};
+}
 
 export default CrumbsStore;
 
