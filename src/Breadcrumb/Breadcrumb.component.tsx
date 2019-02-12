@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 // Import Utilities
-// import CrumbsStore from './store';
+import CrumbsStore from './store';
 
 type Props = {
   /**
@@ -50,45 +50,12 @@ type Props = {
 };
 
 // Create and export the component
-export class Breadcrumb extends React.Component<Props> {
-  static defaultProps = {
-    hidden: false,
-    children: null,
-  };
-
-  state = {
-    id: new Date(),
-  };
-
-  render() {
-    return this.props.children;
-  }
-
-  componentDidMount() {
-    const { data, hidden } = this.props;
-
-    if (!hidden) this.dispatchCrumb('ADD_CRUMB', data);
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    const { data, hidden } = nextProps;
-
-    // Update the crumb if its data has changed
-    if (!(JSON.stringify(data) === JSON.stringify(this.props.data))) {
-      this.dispatchCrumb('UPDATE_CRUMB', data);
-    }
-
-    // Remove/add crumb based on `hidden` prop
-    if (hidden && !this.props.hidden) {
-      this.dispatchCrumb('REMOVE_CRUMB', data);
-    } else if (!hidden && this.props.hidden) {
-      this.dispatchCrumb('ADD_CRUMB', data);
-    }
-  }
-
-  componentWillUnmount() {
-    this.dispatchCrumb('REMOVE_CRUMB', this.props.data);
-  }
+export const Breadcrumb: React.FunctionComponent<Props> = ({
+  data,
+  hidden = false,
+  children = null,
+}) => {
+  let [id] = React.useState(new Date());
 
   /**
    * Dispatch the given `action`
@@ -96,11 +63,24 @@ export class Breadcrumb extends React.Component<Props> {
    * @param  {string} action - A valid action name accepted by the store
    * @param  {object} data   - The breadcrumb data to pass
    */
-  dispatchCrumb(action: any, data: any) {
-    // const { id } = this.state;
-    // CrumbsStore().dispatch({
-    //   type: action,
-    //   payload: { id, ...data },
-    // });
+
+  function dispatchCrumb(action: any, data: any) {
+    CrumbsStore().dispatch({
+      type: action,
+      payload: { id, ...data },
+    });
   }
-}
+
+  React.useEffect(() => {
+    // Remove/add crumb based on `hidden` prop
+    if (!hidden) dispatchCrumb('ADD_CRUMB', data);
+    else dispatchCrumb('REMOVE_CRUMB', data);
+    // Update the crumb if its data has changed
+    dispatchCrumb('UPDATE_CRUMB', data);
+    return () => {
+      dispatchCrumb('REMOVE_CRUMB', data);
+    };
+  }, [hidden, data]);
+
+  return children;
+};
