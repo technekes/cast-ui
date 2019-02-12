@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Import Utilities
-import Store from './store';
+import CrumbsStore from './store';
 
 type Props = {
   /** the content of the panel  */
@@ -89,7 +89,17 @@ export const Breadcrumbs: React.FunctionComponent<Props> = ({
   theme,
 }) => {
   // _unsubscribe: Function = () => true;
-  let crumbs = Store.getState();
+
+  // React.useEffect(() => {
+  //   this._unsubscribe = CrumbsStore.subscribe(() => {
+  //     this.forceUpdate();
+  //   });
+  //   return () => {
+  //     this._unsubscribe();
+  //   };
+  // });
+
+  let crumbs = CrumbsStore().state;
 
   crumbs = crumbs.sort((a: any, b: any) => {
     return a.pathname.length - b.pathname.length;
@@ -131,15 +141,6 @@ export const Breadcrumbs: React.FunctionComponent<Props> = ({
         props.theme.styles[props.breadcrumbactivestyle].flood};
     }
   `;
-
-  React.useEffect(() => {
-    this._unsubscribe = Store.subscribe(() => {
-      this.forceUpdate();
-    });
-    return () => {
-      this._unsubscribe();
-    };
-  });
 
   return (
     <SCrumbsWrapper hidden={hidden}>
