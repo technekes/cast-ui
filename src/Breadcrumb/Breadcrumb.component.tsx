@@ -10,7 +10,7 @@ type Props = {
    *
    * @default null
    */
-  children?: React.ReactNode;
+  children?: any;
   /**
    * Show or hide breadcrumbs
    *
