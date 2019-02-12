@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 // Import Utilities
-import { Dispatch } from './store';
+import CrumbsStore from './store';
 
 type Props = {
   /**
@@ -99,7 +99,7 @@ export class Breadcrumb extends React.Component<Props> {
   dispatchCrumb(action: any, data: any) {
     const { id } = this.state;
 
-    Dispatch({
+    CrumbsStore().dispatch({
       type: action,
       payload: { id, ...data },
     });
