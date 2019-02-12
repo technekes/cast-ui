@@ -82,101 +82,90 @@ export const Breadcrumbs: React.FunctionComponent<Props> = ({
   breadcrumbdefaultstyle = 'default',
   breadcrumbactivestyle = 'primary',
   breadcrumbsize = 'md',
+  BreadcrumbsContainer: BCCWrapper,
+  BreadcrumbItemContainer: BCICWrapper,
+  BreadcrumbItem: BCIWrapper,
+  separator: Separator,
+  theme,
 }) => {
-
   // _unsubscribe: Function = () => true;
+  let crumbs = Store.getState();
 
-  return {
-    const {
-      hidden,
-      setCrumbs,
-      BreadcrumbsContainer: BCCWrapper,
-      BreadcrumbItemContainer: BCICWrapper,
-      BreadcrumbItem: BCIWrapper,
-      separator: Separator,
-      breadcrumbsize,
-      breadcrumbdefaultstyle,
-      breadcrumbactivestyle,
-      theme,
-    } = this.props;
-    let crumbs = Store.getState();
+  crumbs = crumbs.sort((a: any, b: any) => {
+    return a.pathname.length - b.pathname.length;
+  });
+  if (setCrumbs) crumbs = setCrumbs(crumbs);
 
-    crumbs = crumbs.sort((a: any, b: any) => {
-      return a.pathname.length - b.pathname.length;
-    });
-    if (setCrumbs) crumbs = setCrumbs(crumbs);
+  const CrumbsWrapper = BCCWrapper
+    ? (props: any) => <BCCWrapper {...props}>{props.children}</BCCWrapper>
+    : (props: any) => <nav {...props}>{props.children}</nav>;
+  const CrumbItemWrapper = BCICWrapper
+    ? (props: any) => <BCICWrapper {...props}>{props.children}</BCICWrapper>
+    : (props: any) => <span {...props}>{props.children}</span>;
+  const CrumbItem = BCIWrapper
+    ? (props: any) => <BCIWrapper {...props}>{props.children}</BCIWrapper>
+    : (props: any) => <NavLink {...props}>{props.children}</NavLink>;
+  const SeparatorWrapper = Separator
+    ? (props: any) => <Separator {...props}>></Separator>
+    : (props: any) => <span {...props}>></span>;
 
-    const CrumbsWrapper = BCCWrapper
-      ? (props: any) => <BCCWrapper {...props}>{props.children}</BCCWrapper>
-      : (props: any) => <nav {...props}>{props.children}</nav>;
-    const CrumbItemWrapper = BCICWrapper
-      ? (props: any) => <BCICWrapper {...props}>{props.children}</BCICWrapper>
-      : (props: any) => <span {...props}>{props.children}</span>;
-    const CrumbItem = BCIWrapper
-      ? (props: any) => <BCIWrapper {...props}>{props.children}</BCIWrapper>
-      : (props: any) => <NavLink {...props}>{props.children}</NavLink>;
-    const SeparatorWrapper = Separator
-      ? (props: any) => <Separator {...props}>></Separator>
-      : (props: any) => <span {...props}>></span>;
-
-    const SCrumbsWrapper = styled(CrumbsWrapper)`
-      display: ${(props: Props) => (props.hidden ? 'none' : 'block')};
-    `;
-    const SCrumbItemWrapper = styled(CrumbItemWrapper)`
-      font-weight: 700;
-      font-family: ${(props: Props) => props.theme.typography.fontFamily};
-      font-size: ${(props: Props) =>
-        props.theme.common[props.breadcrumbsize].fontSize};
+  const SCrumbsWrapper = styled(CrumbsWrapper)`
+    display: ${(props: Props) => (props.hidden ? 'none' : 'block')};
+  `;
+  const SCrumbItemWrapper = styled(CrumbItemWrapper)`
+    font-weight: 700;
+    font-family: ${(props: Props) => props.theme.typography.fontFamily};
+    font-size: ${(props: Props) =>
+      props.theme.common[props.breadcrumbsize].fontSize};
+    color: ${(props: Props) =>
+      props.theme.styles[props.breadcrumbdefaultstyle].flood};
+  `;
+  const SCrumbItem = styled(CrumbItem)`
+    text-decoration: none;
+    color: ${(props: Props) =>
+      props.theme.styles[props.breadcrumbdefaultstyle].flood};
+    padding: ${(props: Props) =>
+      props.theme.common[props.breadcrumbsize].padding};
+    &.crumb-item--active {
       color: ${(props: Props) =>
-        props.theme.styles[props.breadcrumbdefaultstyle].flood};
-    `;
-    const SCrumbItem = styled(CrumbItem)`
-      text-decoration: none;
-      color: ${(props: Props) =>
-        props.theme.styles[props.breadcrumbdefaultstyle].flood};
-      padding: ${(props: Props) =>
-        props.theme.common[props.breadcrumbsize].padding};
-      &.crumb-item--active {
-        color: ${(props: Props) =>
-          props.theme.styles[props.breadcrumbactivestyle].flood};
-      }
-    `;
+        props.theme.styles[props.breadcrumbactivestyle].flood};
+    }
+  `;
 
-    React.useEffect(() => {
-      this._unsubscribe = Store.subscribe(() => {
-        this.forceUpdate();
-      });
-      return () => {
-        this._unsubscribe();
-      }
+  React.useEffect(() => {
+    this._unsubscribe = Store.subscribe(() => {
+      this.forceUpdate();
     });
+    return () => {
+      this._unsubscribe();
+    };
+  });
 
-    return (
-      <SCrumbsWrapper hidden={hidden}>
-        {crumbs.map((crumb: any, i: any) => (
-          <SCrumbItemWrapper
-            key={crumb.id}
+  return (
+    <SCrumbsWrapper hidden={hidden}>
+      {crumbs.map((crumb: any, i: any) => (
+        <SCrumbItemWrapper
+          key={crumb.id}
+          breadcrumbsize={breadcrumbsize}
+          breadcrumbdefaultstyle={breadcrumbdefaultstyle}
+          theme={theme}>
+          <SCrumbItem
+            exact
+            activeClassName="crumb-item--active"
+            to={{
+              pathname: crumb.pathname,
+              search: crumb.search,
+              state: crumb.state,
+            }}
             breadcrumbsize={breadcrumbsize}
             breadcrumbdefaultstyle={breadcrumbdefaultstyle}
+            breadcrumbactivestyle={breadcrumbactivestyle}
             theme={theme}>
-            <SCrumbItem
-              exact
-              activeClassName="crumb-item--active"
-              to={{
-                pathname: crumb.pathname,
-                search: crumb.search,
-                state: crumb.state,
-              }}
-              breadcrumbsize={breadcrumbsize}
-              breadcrumbdefaultstyle={breadcrumbdefaultstyle}
-              breadcrumbactivestyle={breadcrumbactivestyle}
-              theme={theme}>
-              {crumb.title}
-            </SCrumbItem>
-            {i < crumbs.length - 1 ? <SeparatorWrapper /> : null}
-          </SCrumbItemWrapper>
-        ))}
-      </SCrumbsWrapper>
-    );
-  }
-}
+            {crumb.title}
+          </SCrumbItem>
+          {i < crumbs.length - 1 ? <SeparatorWrapper /> : null}
+        </SCrumbItemWrapper>
+      ))}
+    </SCrumbsWrapper>
+  );
+};
