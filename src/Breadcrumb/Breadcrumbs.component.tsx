@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Import Utilities
-import useCrumbsStore from './store';
+import { useCrumbsStore } from './store';
 
 type Props = {
   /** the content of the panel  */
@@ -84,28 +84,30 @@ export const Breadcrumbs: React.FunctionComponent<Props> = ({
   BreadcrumbItemContainer: BCICWrapper,
   BreadcrumbItem: BCIWrapper,
   separator: Separator,
+  children,
   theme,
 }) => {
-  let _unsubscribe: any = () => true;
-
-  const { state, subscribe } = useCrumbsStore();
-  const [localcrumbs, setLocalcrumbs] = React.useState([]);
+  let crumbs = useCrumbsStore();
+  console.log(' show me ', crumbs.crumbs);
 
   React.useEffect(() => {
-    setLocalcrumbs(state);
-    _unsubscribe = subscribe(() => {
-      // forceUpdate();
-      console.log('we know you were useCrumbsStoreed', crumbs);
+    crumbs = crumbs.crumbs.sort((a: any, b: any) => {
+      return a.pathname.length - b.pathname.length;
     });
-    return () => {
-      _unsubscribe();
-    };
-  }, [state]);
+    if (setCrumbs) crumbs = setCrumbs(crumbs);
+  }, [setCrumbs]);
 
-  let crumbs = localcrumbs.sort((a: any, b: any) => {
-    return a.pathname.length - b.pathname.length;
-  });
-  if (setCrumbs) crumbs = setCrumbs(crumbs);
+  // let _unsubscribe: any = () => true;
+  // React.useEffect(() => {
+  //   setLocalcrumbs(state);
+  //   _unsubscribe = Store.subscribe(() => {
+  //     // forceUpdate();
+  //     console.log('we know you were useCrumbsStoreed', crumbs);
+  //   });
+  //   return () => {
+  //     _unsubscribe();
+  //   };
+  // }, [state]);
   // crumbs = [{ title: 'Home', pathname: '/', id: 'sjdhfgjdshgj' }];
   // console.log('we know you were useCrumbsStoreed', crumbs);
 
@@ -147,7 +149,7 @@ export const Breadcrumbs: React.FunctionComponent<Props> = ({
 
   return (
     <SCrumbsWrapper hidden={hidden}>
-      {crumbs.map((crumb: any, i: any) => (
+      {crumbs.crumbs.map((crumb: any, i: any) => (
         <SCrumbItemWrapper
           key={crumb.id}
           breadcrumbsize={breadcrumbsize}
@@ -167,9 +169,10 @@ export const Breadcrumbs: React.FunctionComponent<Props> = ({
             theme={theme}>
             {crumb.title}
           </SCrumbItem>
-          {i < crumbs.length - 1 ? <SeparatorWrapper /> : null}
+          {i < crumbs.crumbs.length - 1 ? <SeparatorWrapper /> : null}
         </SCrumbItemWrapper>
       ))}
+      {children}
     </SCrumbsWrapper>
   );
 };

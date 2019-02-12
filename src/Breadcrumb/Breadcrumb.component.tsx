@@ -55,14 +55,13 @@ export const Breadcrumb: React.FunctionComponent<Props> = ({
   hidden = false,
   children = null,
 }) => {
-  // let [id] = React.useState(new Date());
   let Dispatch = useCrumbsStore().dispatch;
 
   /**
    * Dispatch the given `action`
    *
-   * @param  {string} action - A valid action name accepted by the store
-   * @param  {object} data   - The breadcrumb data to pass
+   * @param  {string} action  - A valid action name accepted by the store
+   * @param  {object} payload - The breadcrumb data to pass
    */
 
   function dispatchCrumb(action: any, payload: any) {
