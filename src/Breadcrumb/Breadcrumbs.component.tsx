@@ -76,18 +76,17 @@ type Props = {
 };
 
 // Create and export the component
-export class Breadcrumbs extends React.Component<Props> {
-  static defaultProps = {
-    hidden: false,
-    setCrumbs: undefined,
-    breadcrumbdefaultstyle: 'default',
-    breadcrumbactivestyle: 'primary',
-    breadcrumbsize: 'md',
-  };
+export const Breadcrumbs: React.FunctionComponent<Props> = ({
+  hidden = false,
+  setCrumbs = undefined,
+  breadcrumbdefaultstyle = 'default',
+  breadcrumbactivestyle = 'primary',
+  breadcrumbsize = 'md',
+}) => {
 
-  _unsubscribe: Function = () => true;
+  // _unsubscribe: Function = () => true;
 
-  render() {
+  return {
     const {
       hidden,
       setCrumbs,
@@ -143,6 +142,15 @@ export class Breadcrumbs extends React.Component<Props> {
       }
     `;
 
+    React.useEffect(() => {
+      this._unsubscribe = Store.subscribe(() => {
+        this.forceUpdate();
+      });
+      return () => {
+        this._unsubscribe();
+      }
+    });
+
     return (
       <SCrumbsWrapper hidden={hidden}>
         {crumbs.map((crumb: any, i: any) => (
@@ -170,15 +178,5 @@ export class Breadcrumbs extends React.Component<Props> {
         ))}
       </SCrumbsWrapper>
     );
-  }
-
-  componentWillMount() {
-    this._unsubscribe = Store.subscribe(() => {
-      this.forceUpdate();
-    });
-  }
-
-  componentWillUnmount() {
-    this._unsubscribe();
   }
 }
