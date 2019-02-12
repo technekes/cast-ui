@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 // Import Utilities
-import CrumbsStore from './store';
+import useCrumbsStore from './store';
 
 type Props = {
   /**
@@ -55,7 +55,8 @@ export const Breadcrumb: React.FunctionComponent<Props> = ({
   hidden = false,
   children = null,
 }) => {
-  let [id] = React.useState(new Date());
+  // let [id] = React.useState(new Date());
+  let Dispatch = useCrumbsStore().dispatch;
 
   /**
    * Dispatch the given `action`
@@ -64,10 +65,10 @@ export const Breadcrumb: React.FunctionComponent<Props> = ({
    * @param  {object} data   - The breadcrumb data to pass
    */
 
-  function dispatchCrumb(action: any, data: any) {
-    CrumbsStore().dispatch({
+  function dispatchCrumb(action: any, payload: any) {
+    Dispatch({
       type: action,
-      payload: { id, ...data },
+      payload: { id: new Date(), ...payload },
     });
   }
 

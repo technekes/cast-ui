@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Import Utilities
-import CrumbsStore from './store';
+import useCrumbsStore from './store';
 
 type Props = {
   /** the content of the panel  */
@@ -16,33 +16,31 @@ type Props = {
    **/
   hidden?: boolean;
   /**
-   * HTML element tag e.g 'div' or React Element|Component for breadcrumbs container
+   * React Element|Component for breadcrumbs container
    *
-   * @default 'nav'
    * @default '(props: Props) => <nav {...props}>{props.children}</nav>'
    **/
-  BreadcrumbsContainer?: React.ReactType;
+  BreadcrumbsContainer?: React.ComponentType<any>;
   /**
-   * HTML element tag e.g 'span' or React Element|Component for individual breadcrumb container
+   * React Element|Component for individual breadcrumb container
    *
-   * @default 'span'
    * @default '(props: Props) => <span {...props}>{props.children}</span>'
    **/
-  BreadcrumbItemContainer?: React.ReactType;
+  BreadcrumbItemContainer?: React.ComponentType<any>;
   /**
-   * HTML element tag e.g 'a' or React Element|Component for individual breadcrumb item
+   * React Element|Component for individual breadcrumb item
    *
    * @default 'NavLink from `react-router-dom`''
    * @default '(props: Props) => <NavLink {...props}>{props.children}</NavLink>'
    **/
-  BreadcrumbItem?: React.ReactType;
+  BreadcrumbItem?: React.ComponentType<any>;
   /**
-   * HTML content tag e.g '>' or React Element|Component for individual breadcrumb item seperator
+   * React Element|Component for individual breadcrumb item seperator
    *
    * @default '>'
    * @default '(props: Props) => <span {...props}> > </span>'
    **/
-  separator?: React.ReactType;
+  separator?: React.ComponentType<any>;
   /**
    * Set/Update the crumbs list
    *
@@ -88,23 +86,28 @@ export const Breadcrumbs: React.FunctionComponent<Props> = ({
   separator: Separator,
   theme,
 }) => {
-  // _unsubscribe: Function = () => true;
+  let _unsubscribe: any = () => true;
 
-  // React.useEffect(() => {
-  //   this._unsubscribe = CrumbsStore.subscribe(() => {
-  //     this.forceUpdate();
-  //   });
-  //   return () => {
-  //     this._unsubscribe();
-  //   };
-  // });
+  const { state, subscribe } = useCrumbsStore();
+  const [localcrumbs, setLocalcrumbs] = React.useState([]);
 
-  let crumbs = CrumbsStore().state;
+  React.useEffect(() => {
+    setLocalcrumbs(state);
+    _unsubscribe = subscribe(() => {
+      // forceUpdate();
+      console.log('we know you were useCrumbsStoreed', crumbs);
+    });
+    return () => {
+      _unsubscribe();
+    };
+  }, [state]);
 
-  crumbs = crumbs.sort((a: any, b: any) => {
+  let crumbs = localcrumbs.sort((a: any, b: any) => {
     return a.pathname.length - b.pathname.length;
   });
   if (setCrumbs) crumbs = setCrumbs(crumbs);
+  // crumbs = [{ title: 'Home', pathname: '/', id: 'sjdhfgjdshgj' }];
+  // console.log('we know you were useCrumbsStoreed', crumbs);
 
   const CrumbsWrapper = BCCWrapper
     ? (props: any) => <BCCWrapper {...props}>{props.children}</BCCWrapper>

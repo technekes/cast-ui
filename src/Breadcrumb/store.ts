@@ -17,12 +17,20 @@ export function reducer(state: any, action: any) {
   }
 }
 
-export function CrumbsStore() {
-  let [state, dispatch] = React.useReducer(reducer, []);
-  return { state, dispatch };
+export function useCrumbsStore() {
+  const [state, dispatch] = React.useReducer(reducer, []);
+  React.useEffect(() => {
+    // console.log('we know data has changed', state);
+    subscribe(() => {});
+  }, [state]);
+  function subscribe(cb: Function) {
+    console.log('subscribe called', cb);
+    return cb;
+  }
+  return { state, dispatch, subscribe };
 }
 
-export default CrumbsStore;
+export default useCrumbsStore;
 
 // // Create the reducer
 // const crumbs = (state: any = [], action: any) => {
