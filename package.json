@@ -25,7 +25,8 @@
   "peerDependencies": {
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
-    "styled-components": "^4.1.0"
+    "styled-components": "^4.1.0",
+    "react-router-dom": "^4.3.1"
   },
   "dependencies": {
     "lodash": "^4.17.11",
@@ -74,7 +75,6 @@
     "react-dom": "^16.6.1",
     "react-router-dom": "^4.3.1",
     "react-slick": "^0.23.2",
-    "redux": "^4.0.1",
     "shx": "^0.3.2",
     "slick-carousel": "^1.8.1",
     "storybook-addon-jsx": "^5.4.0",
