@@ -15,6 +15,12 @@ type Props = {
    **/
   color?: string;
   /**
+   * Select Draggable borders' color. Must be a color defined in theme colors
+   *
+   * @default 'lightGray'
+   **/
+  bordercolor: string;
+  /**
    * Select Draggable Size
    *
    * @default 'md'
@@ -44,5 +50,6 @@ export const Draggable: React.FunctionComponent<Props> = props => (
 );
 Draggable.defaultProps = {
   color: 'lightGray',
+  bordercolor: 'lightGray',
   size: 'md',
 };
