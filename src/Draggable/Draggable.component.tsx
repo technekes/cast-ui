@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { DraggableInfo, DraggableFooter } from './';
 
 type Props = {
   /**
@@ -9,6 +10,12 @@ type Props = {
    **/
   color: string;
   /**
+   * Select Draggable Size
+   *
+   * @default 'md'
+   **/
+  size: string;
+  /**
    * From theme provider
    *
    * @default defaultTheme
@@ -16,16 +23,19 @@ type Props = {
   theme?: any;
 };
 
-const SDraggable = styled.div`
+const SDraggableParent = styled.div`
   position: relative;
-  margin: 100px auto;
+  padding: ${(props: Props) => props.theme.common[props.size].padding};
 `;
 
 export const Draggable: React.FunctionComponent<Props> = ({
   color = 'lightGray',
+  size = 'md',
   theme,
 }) => (
-  <SDraggable color={color} theme={theme}>
+  <SDraggableParent color={color} size={size} theme={theme}>
+    <DraggableInfo color={color} theme={theme} />
     <div>Comming</div>
-  </SDraggable>
+    <DraggableFooter color={color} theme={theme} />
+  </SDraggableParent>
 );

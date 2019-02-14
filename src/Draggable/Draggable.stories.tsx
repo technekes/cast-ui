@@ -27,6 +27,7 @@ storiesOf('Draggable', module).add(
         ['lightGray', 'gray', 'blue', 'white', 'red', 'yellow'],
         'lightGray',
       )}
+      size={select('btnSize', ['sm', 'md', 'lg'], 'md')}
     />
   )),
 );
