@@ -7,13 +7,13 @@ type Props = {
    *
    * @default 'lightGray'
    **/
-  color: string;
+  color?: string;
   /**
    * Select Draggable Size
    *
    * @default 'md'
    **/
-  size: string;
+  size?: string;
   /**
    * From theme provider
    *

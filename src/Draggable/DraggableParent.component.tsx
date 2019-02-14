@@ -7,13 +7,13 @@ type Props = {
    *
    * @default 'lightGray'
    **/
-  color: string;
+  color?: string;
   /**
    * Select Draggable Size
    *
    * @default 'md'
    **/
-  size: string;
+  size?: string;
   /**
    * From theme provider
    *
@@ -28,9 +28,11 @@ const SDraggableParent = styled.div`
 
 export const DraggableParent: React.FunctionComponent<Props> = ({
   color = 'lightGray',
+  children = null,
   theme,
 }) => (
   <SDraggableParent color={color} theme={theme}>
     <div>This is the Parent section</div>
+    {children}
   </SDraggableParent>
 );

@@ -13,7 +13,7 @@ type Props = {
    *
    * @default 'lightGray'
    **/
-  color: string;
+  color?: string;
   /**
    * Select Draggable Size
    *

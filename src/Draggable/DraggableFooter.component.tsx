@@ -7,7 +7,7 @@ type Props = {
    *
    * @default 'lightGray'
    **/
-  color: string;
+  color?: string;
   /**
    * From theme provider
    *
