@@ -21,6 +21,12 @@ type Props = {
    **/
   size: string;
   /**
+   * Size of the handle in the draggable item
+   *
+   * @default '30'
+   **/
+  itemhandlesize?: number;
+  /**
    * From theme provider
    *
    * @default defaultTheme
@@ -69,4 +75,5 @@ DraggableItem.defaultProps = {
   color: 'lightGray',
   bordercolor: 'lightGray',
   size: 'md' as 'md' | 'lg' | 'sm',
+  itemhandlesize: 30,
 };

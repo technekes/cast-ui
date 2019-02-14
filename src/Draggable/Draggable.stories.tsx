@@ -33,6 +33,8 @@ storiesOf('Draggable', module).add(
         'lightGray',
       )}
       size={select('size', ['sm', 'md', 'lg'], 'md')}
+      parenthandlesize={select('parenthandlesize', [20, 30, 40, 50, 60], 30)}
+      itemhandlesize={select('itemhandlesize', [20, 30, 40, 50, 60], 30)}
     />
   )),
 );

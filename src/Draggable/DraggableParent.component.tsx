@@ -22,6 +22,12 @@ type Props = {
    **/
   size: string;
   /**
+   * Size of the handle in the draggable parent container
+   *
+   * @default '30'
+   **/
+  parenthandlesize?: number;
+  /**
    * From theme provider
    *
    * @default defaultTheme
@@ -56,7 +62,7 @@ const SDraggableParent = styled.div`
 
 export const DraggableParent: React.FunctionComponent<Props> = props => (
   <SDraggableParent {...props}>
-    <DraggableHandle size={30} theme={props.theme} />
+    <DraggableHandle size={props.parenthandlesize} theme={props.theme} />
     {props.children}
     <div>right button</div>
   </SDraggableParent>
@@ -65,4 +71,5 @@ DraggableParent.defaultProps = {
   color: 'lightGray',
   bordercolor: 'lightGray',
   size: 'md' as 'md' | 'lg' | 'sm',
+  parenthandlesize: 30,
 };
