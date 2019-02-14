@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { DraggableHandle } from './';
 
 type Props = {
   /**
@@ -9,7 +10,7 @@ type Props = {
    **/
   color?: string;
   /**
-   * Select Draggable borders' color. Must be a color defined in theme colors
+   * Select Draggable Parent borders' color. Must be a color defined in theme colors
    *
    * @default 'lightGray'
    **/
@@ -35,19 +36,33 @@ const SDraggableParent = styled.div`
   justify-content: start;
   padding: ${(props: Props) => props.theme.common[props.size].padding};
   border: 1px dashed ${(props: Props) => props.theme.colors[props.bordercolor]};
+  .handleIcon {
+    cursor: pointer;
+    color: ${(props: Props) => props.theme.colors[props.bordercolor]};
+    padding: ${(props: Props) => props.theme.common[props.size].padding};
+    margin-left: -${(props: Props) => props.theme.common[props.size].padding.toString().split(' ')[1]};
+  }
   &:hover {
     background-color: ${(props: Props) => props.theme.colors.panelBackground};
+    .handleIcon {
+      color: ${(props: Props) => props.theme.colors.blue};
+    }
   }
 `;
 
+// const SDraggableHandle = styled(DraggableHandle)`
+//   color: ${(props: Props) => props.theme.colors[props.bordercolor]};
+// `;
+
 export const DraggableParent: React.FunctionComponent<Props> = props => (
   <SDraggableParent {...props}>
-    <div>This is the Parent section</div>
+    <DraggableHandle size={30} theme={props.theme} />
     {props.children}
+    <div>right button</div>
   </SDraggableParent>
 );
 DraggableParent.defaultProps = {
   color: 'lightGray',
   bordercolor: 'lightGray',
-  size: 'md',
+  size: 'md' as 'md' | 'lg' | 'sm',
 };

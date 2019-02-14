@@ -51,5 +51,5 @@ export const Draggable: React.FunctionComponent<Props> = props => (
 Draggable.defaultProps = {
   color: 'lightGray',
   bordercolor: 'lightGray',
-  size: 'md',
+  size: 'md' as 'md' | 'lg' | 'sm',
 };

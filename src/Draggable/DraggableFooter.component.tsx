@@ -22,7 +22,7 @@ const SDraggableFooter = styled.div`
 
 export const DraggableFooter: React.FunctionComponent<Props> = props => (
   <SDraggableFooter {...props}>
-    <div>This is the footer section</div>
+    <div>Footer Button</div>
   </SDraggableFooter>
 );
 DraggableFooter.defaultProps = {
