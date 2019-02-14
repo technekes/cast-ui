@@ -42,6 +42,8 @@ const SDraggableParent = styled.div`
   justify-content: start;
   padding: ${(props: Props) => props.theme.common[props.size].padding};
   border: 1px dashed ${(props: Props) => props.theme.colors[props.bordercolor]};
+  border-radius: ${(props: Props) =>
+    props.theme.common[props.size].borderRadius};
   .handleIcon {
     cursor: pointer;
     color: ${(props: Props) => props.theme.colors[props.bordercolor]};
@@ -49,6 +51,7 @@ const SDraggableParent = styled.div`
     margin-left: -${(props: Props) => props.theme.common[props.size].padding.toString().split(' ')[1]};
   }
   &:hover {
+    cursor: pointer;
     background-color: ${(props: Props) => props.theme.colors.panelBackground};
     .handleIcon {
       color: ${(props: Props) => props.theme.colors.blue};

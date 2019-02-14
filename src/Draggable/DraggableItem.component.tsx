@@ -42,6 +42,8 @@ const SDraggableItem = styled.div`
   justify-content: start;
   background: ${(props: Props) => props.theme.colors.white};
   border: 1px solid ${(props: Props) => props.theme.colors[props.bordercolor]};
+  border-radius: ${(props: Props) =>
+    props.theme.common[props.size].borderRadius};
 `;
 
 const SItemLeftContent = styled.div`
