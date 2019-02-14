@@ -1,6 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { DraggableInfo, DraggableFooter } from './';
+import {
+  DraggableInfo,
+  DraggableParent,
+  DraggableItem,
+  DraggableFooter,
+} from './';
 
 type Props = {
   /**
@@ -23,7 +28,7 @@ type Props = {
   theme?: any;
 };
 
-const SDraggableParent = styled.div`
+const SDraggable = styled.div`
   position: relative;
   padding: ${(props: Props) => props.theme.common[props.size].padding};
 `;
@@ -33,9 +38,11 @@ export const Draggable: React.FunctionComponent<Props> = ({
   size = 'md',
   theme,
 }) => (
-  <SDraggableParent color={color} size={size} theme={theme}>
+  <SDraggable color={color} size={size} theme={theme}>
     <DraggableInfo color={color} theme={theme} />
-    <div>Comming</div>
+    <DraggableParent color={color} size={size} theme={theme}>
+      <DraggableItem color={color} size={size} theme={theme} />
+    </DraggableParent>
     <DraggableFooter color={color} theme={theme} />
-  </SDraggableParent>
+  </SDraggable>
 );
