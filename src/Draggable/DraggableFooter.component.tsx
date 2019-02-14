@@ -20,11 +20,11 @@ const SDraggableFooter = styled.div`
   position: relative;
 `;
 
-export const DraggableFooter: React.FunctionComponent<Props> = ({
-  color = 'lightGray',
-  theme,
-}) => (
-  <SDraggableFooter color={color} theme={theme}>
+export const DraggableFooter: React.FunctionComponent<Props> = props => (
+  <SDraggableFooter {...props}>
     <div>This is the footer section</div>
   </SDraggableFooter>
 );
+DraggableFooter.defaultProps = {
+  color: 'lightGray',
+};

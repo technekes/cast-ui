@@ -13,7 +13,7 @@ type Props = {
    *
    * @default 'md'
    **/
-  size?: string;
+  size: string;
   /**
    * From theme provider
    *
@@ -24,15 +24,16 @@ type Props = {
 
 const SDraggableParent = styled.div`
   position: relative;
+  padding: ${(props: Props) => props.theme.common[props.size].padding};
 `;
 
-export const DraggableParent: React.FunctionComponent<Props> = ({
-  color = 'lightGray',
-  children = null,
-  theme,
-}) => (
-  <SDraggableParent color={color} theme={theme}>
+export const DraggableParent: React.FunctionComponent<Props> = props => (
+  <SDraggableParent {...props}>
     <div>This is the Parent section</div>
-    {children}
+    {props.children}
   </SDraggableParent>
 );
+DraggableParent.defaultProps = {
+  color: 'lightGray',
+  size: 'md',
+};

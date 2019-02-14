@@ -20,11 +20,11 @@ const SDraggableInfo = styled.div`
   position: relative;
 `;
 
-export const DraggableInfo: React.FunctionComponent<Props> = ({
-  color = 'lightGray',
-  theme,
-}) => (
-  <SDraggableInfo color={color} theme={theme}>
+export const DraggableInfo: React.FunctionComponent<Props> = props => (
+  <SDraggableInfo {...props}>
     <div>This is the infor section</div>
   </SDraggableInfo>
 );
+DraggableInfo.defaultProps = {
+  color: 'lightGray',
+};

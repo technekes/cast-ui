@@ -26,11 +26,12 @@ const SDraggableItem = styled.div`
   position: relative;
 `;
 
-export const DraggableItem: React.FunctionComponent<Props> = ({
-  color = 'lightGray',
-  theme,
-}) => (
-  <SDraggableItem color={color} theme={theme}>
+export const DraggableItem: React.FunctionComponent<Props> = props => (
+  <SDraggableItem {...props}>
     <div>This is the item section</div>
   </SDraggableItem>
 );
+DraggableItem.defaultProps = {
+  color: 'lightGray',
+  size: 'md',
+};

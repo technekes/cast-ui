@@ -33,16 +33,16 @@ const SDraggable = styled.div`
   padding: ${(props: Props) => props.theme.common[props.size].padding};
 `;
 
-export const Draggable: React.FunctionComponent<Props> = ({
-  color = 'lightGray',
-  size = 'md',
-  theme,
-}) => (
-  <SDraggable color={color} size={size} theme={theme}>
-    <DraggableInfo color={color} theme={theme} />
-    <DraggableParent color={color} size={size} theme={theme}>
-      <DraggableItem color={color} size={size} theme={theme} />
+export const Draggable: React.FunctionComponent<Props> = props => (
+  <SDraggable {...props}>
+    <DraggableInfo {...props} />
+    <DraggableParent {...props}>
+      <DraggableItem {...props} />
     </DraggableParent>
-    <DraggableFooter color={color} theme={theme} />
+    <DraggableFooter {...props} />
   </SDraggable>
 );
+Draggable.defaultProps = {
+  color: 'lightGray',
+  size: 'md',
+};
