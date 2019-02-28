@@ -17,6 +17,7 @@ import {
   IconButton,
 } from '../';
 import SecondaryParent from './SecondaryParent.component';
+import TertiallyParent from './TertiallyParent.componnet';
 import { wInfo } from '../storybook-utils';
 
 storiesOf('Draggable', module).add(
@@ -166,6 +167,16 @@ storiesOf('Draggable', module).add(
           30,
         )}
         showparenthandle={boolean('Secondary showparenthandle', true)}
+      />
+      <TertiallyParent
+        parentActive={boolean('Tertially parentActive', false)}
+        parenthandlesize={select(
+          'Tertially parenthandlesize',
+          [20, 30, 40, 50, 60],
+          30,
+        )}
+        showparenthandle={boolean('Tertially showparenthandle', true)}
+        bordercolor="red"
       />
       <DraggableFooter>
         <IconButton

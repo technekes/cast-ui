@@ -101,6 +101,10 @@ export class SecondaryParent extends React.Component<Props> {
       { key: 'parentActive', defaultVal: parentActive },
       { key: 'draggable', defaultVal: props.draggable },
     ];
+
+    // Use local props if defined,
+    // else, use parent props,
+    // else use default props' values
     const mergeProps = (
       localProps: any,
       { propsToMerge, parentProps }: any,
