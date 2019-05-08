@@ -26,12 +26,12 @@ const config = {
       },
     },
     {
-      file: pkg.main,
+      file: pkg.module,
       format: 'es',
       name: 'castUI',
     },
     {
-      file: pkg.module,
+      file: pkg.main,
       format: 'cjs',
     },
   ],
