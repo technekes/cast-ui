@@ -1,17 +1,13 @@
 /* tslint:disable:max-line-length */
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import ReactTable, {
-  TableProps,
-  ReactTableDefaults,
-  ControlledStateCallbackProps,
-} from 'react-table';
+import ReactTable, { TableProps, ReactTableDefaults } from 'react-table';
 import { Themes } from '../themes';
 
 import TablePagination from '../TablePagination/TablePagination.component';
 import 'react-table/react-table.css';
 
-export interface Props extends TableProps, ControlledStateCallbackProps {
+export interface Props extends TableProps {
   data: any;
   tableSize?: string;
   /**
@@ -198,6 +194,7 @@ export class Table extends React.Component<Props> {
           pageSize={10}
           showPagination={data.length > 0}
           data={data}
+          {...props}
           getTrProps={(state, rowInfo, column) => {
             let className = '';
             if (
@@ -219,7 +216,6 @@ export class Table extends React.Component<Props> {
           PaginationComponent={TablePagination}
           nextText="Next >"
           previousText="< Previous"
-          {...props}
         />
       </ThemeProvider>
     );

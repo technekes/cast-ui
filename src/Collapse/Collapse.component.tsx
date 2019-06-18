@@ -7,7 +7,6 @@ const EXPANDING = 'expanding';
 const EXPANDED = 'expanded';
 
 export type Props = {
-  isCollapsed?: boolean;
   isOpen?: boolean;
   children?: any;
   elementType?: any;
@@ -44,13 +43,8 @@ export class Collapse extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
 
-    let collapseState = EXPANDED;
-    if (props.isCollapsed) {
-      collapseState = COLLAPSED;
-    }
-
     this.state = {
-      collapseState,
+      collapseState: props.isOpen ? EXPANDED : COLLAPSED,
       collapseStyle: {
         height: getCollapseHeight(props),
         visibility: getCollapseVisibility(props),
@@ -68,7 +62,6 @@ export class Collapse extends React.Component<Props, any> {
       onInit,
       onChange,
       isOpen,
-      isCollapsed,
       theme,
       ...props
     } = this.props;
@@ -108,25 +101,16 @@ export class Collapse extends React.Component<Props, any> {
 
   // Detect a new collapse state from props.isOpen change
   static getDerivedStateFromProps(props: Props, state: State) {
-    const isOpenProps =
-      props.isOpen !== undefined
-        ? !!props.isOpen && !props.isCollapsed
-        : !!props.isOpen || !props.isCollapsed;
     const isOpen =
       state.collapseState === EXPANDED || state.collapseState === EXPANDING;
-    const isCollapsed =
-      state.collapseState === COLLAPSED || state.collapseState === COLLAPSING;
 
-    const expand = !isOpenProps && isCollapsed;
-    const collapse = isOpenProps && isOpen;
-
-    if (expand) {
+    if (!isOpen && props.isOpen) {
       return {
         hasReversed: state.collapseState === COLLAPSING,
         collapseState: EXPANDING,
       };
     }
-    if (collapse) {
+    if (isOpen && !props.isOpen) {
       return {
         hasReversed: state.collapseState === EXPANDING,
         collapseState: COLLAPSING,

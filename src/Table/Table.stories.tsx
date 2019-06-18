@@ -74,10 +74,6 @@ storiesOf('Table', module).add(
               className,
             };
           }}
-          /** the next line is for checking warning for `react-table` handlers */
-          onSortedChange={() => {
-            console.log('onSortedChange');
-          }}
           tableSize={select('tableSize', ['sm', 'md', 'lg'], 'md')}
           showPagination={boolean('showPagination', true)}
           showPaginationTop={boolean('showPaginationTop', false)}

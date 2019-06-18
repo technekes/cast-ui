@@ -4,7 +4,9 @@ import { boolean, select, text } from '@storybook/addon-knobs/react';
 
 import { Panel, PanelHeader, PanelBody, Collapse } from '../';
 
-type Props = {};
+type Props = {
+  isOpen: boolean;
+};
 
 const initialState = {
   isOpen: true,
@@ -43,9 +45,9 @@ class PanelWithCollapse extends React.Component<Props, State> {
           name={text('Panel Name', 'Catchy Name')}
           title={text('Title', 'Catchy title')}
           toggleItem={this.handleCollapse}
-          isCollapsed={!this.state.isOpen}
+          isCollapsed={this.state.isOpen}
         />
-        <Collapse isCollapsed={!this.state.isOpen}>
+        <Collapse isOpen={this.state.isOpen}>
           <PanelBody
             panelStyle={panelStyle}
             noPadding={boolean('noPadding', false)}
@@ -169,7 +171,7 @@ These props accept CSS color codes or theme color declarations.
       },
     },
   )
-  .add('Collapsible', () => <PanelWithCollapse /*isCollapsed={true}*/ />, {
+  .add('Collapsible', () => <PanelWithCollapse isOpen={true} />, {
     info: {
       text: `
 #### Notes

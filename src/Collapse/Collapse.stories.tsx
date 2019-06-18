@@ -8,7 +8,7 @@ storiesOf('Collapse', module).add(
   'Collapse',
   () => (
     <Collapse
-      isCollapsed={boolean('isCollapsed', true)}
+      isOpen={boolean('isOpen', false)}
       transition={text(
         'transition',
         'height 300ms cubic-bezier(0.4, 0, 0.2, 1)',
