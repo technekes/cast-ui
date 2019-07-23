@@ -25,6 +25,7 @@ export * from './InputGroup';
 export * from './ListGroup';
 export * from './Modal';
 export * from './Navbar';
+export * from './Notification';
 export * from './Pagination';
 export * from './Panel';
 export * from './Popover';

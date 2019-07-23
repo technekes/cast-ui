@@ -45,10 +45,12 @@
     "react-dates": "^20.2.0",
     "react-icons-kit": "^1.2.1",
     "react-modal": "^3.8.1",
+    "react-notifications-component": "^1.1.1",
     "react-paginate": "^6.2.1",
     "react-select": "^2.2.0",
     "react-table": "^6.8.6",
     "react-tabs": "^3.0.0",
+    "react-toastify": "^5.3.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
