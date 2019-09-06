@@ -26,7 +26,6 @@ export type Props = {
 type State = {
   collapseState: any;
   collapseStyle: any;
-  hasReversed: boolean;
 };
 
 const CWrapper = styled.div`
@@ -51,7 +50,6 @@ export class Collapse extends React.Component<Props, any> {
         height: getCollapseHeight(props),
         visibility: getCollapseVisibility(props),
       },
-      hasReversed: false,
     };
   }
 
@@ -104,15 +102,16 @@ export class Collapse extends React.Component<Props, any> {
   // Detect a new collapse state from props.isOpen change
   static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      hasReversed: props.isOpen
-        ? state.collapseState === EXPANDING
-        : state.collapseState === COLLAPSING,
-      collapseState: props.isOpen ? COLLAPSING : EXPANDING,
+      collapseState: props.isOpen ? EXPANDING : COLLAPSING,
     };
   }
 
   componentDidMount() {
-    if (this.state.collapseState === EXPANDED) {
+    console.log(this.state.collapseState, EXPANDED, this.props);
+    if (
+      this.state.collapseState === EXPANDED ||
+      this.state.collapseState === EXPANDING
+    ) {
       this.setExpanded();
     }
     this.onCallback(this.props.onInit);
