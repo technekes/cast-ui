@@ -1,6 +1,6 @@
 # Next Release
 
-- Your contribution here.
+- [#524](https://github.com/technekes/cast-ui/pull/524): Fix pagination buttons - [@abrandontkxs](https://github.com/abrandontkxs)
 
 # 0.4.9 (2019-12-06)
 
