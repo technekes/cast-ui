@@ -1,5 +1,3 @@
-import { defaultColors } from './default';
-
 export { ThemeProvider } from 'styled-components';
 
 export const windfallColors = {
@@ -502,12 +500,12 @@ export const windfallTheme = {
       light: {
         color: windfallColors.drk800,
         backgroundColor: windfallColors.white,
-        chevronColor: defaultColors.primary,
+        chevronColor: windfallColors.primary,
       },
       dark: {
         color: windfallColors.drk800,
         backgroundColor: windfallColors.highlight200,
-        chevronColor: defaultColors.primary,
+        chevronColor: windfallColors.primary,
       },
     },
   },

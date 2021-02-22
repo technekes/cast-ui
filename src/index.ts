@@ -2,7 +2,7 @@
  * Themes
  */
 export * from './themes';
-
+export * from './utils/createTheme';
 /**
  * Components
  */

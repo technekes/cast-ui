@@ -1,5 +1,3 @@
-import { defaultColors } from './default';
-
 export { ThemeProvider } from 'styled-components';
 
 export const azureColors = {
@@ -503,12 +501,12 @@ export const azureTheme = {
       light: {
         color: azureColors.drk800,
         backgroundColor: azureColors.white,
-        chevronColor: defaultColors.primary,
+        chevronColor: azureColors.primary,
       },
       dark: {
         color: azureColors.drk800,
         backgroundColor: azureColors.highlight200,
-        chevronColor: defaultColors.primary,
+        chevronColor: azureColors.primary,
       },
     },
   },

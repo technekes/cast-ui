@@ -1,5 +1,3 @@
-import { defaultColors } from './default';
-
 export { ThemeProvider } from 'styled-components';
 
 export const umberColors = {
@@ -503,12 +501,12 @@ export const umberTheme = {
       light: {
         color: umberColors.drk800,
         backgroundColor: umberColors.white,
-        chevronColor: defaultColors.primary,
+        chevronColor: umberColors.primary,
       },
       dark: {
         color: umberColors.drk800,
         backgroundColor: umberColors.highlight200,
-        chevronColor: defaultColors.primary,
+        chevronColor: umberColors.primary,
       },
     },
   },
