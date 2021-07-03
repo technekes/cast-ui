@@ -35,6 +35,10 @@ export interface Props extends React.HTMLAttributes<HTMLDivElement> {
    **/
   PageButtonFirstLastComponent?: any;
   /**
+   * Props to control the PageSizeOptions Input
+   */
+  pageSizeInputProps?: any;
+  /**
    * Specify any child objects (if applicable)
    **/
   children?: any;
@@ -173,6 +177,7 @@ export class Pagination extends React.Component<Props> {
             isSearchable: false,
             'aria-label': rowsSelectorText,
           }}
+          {...props.pageSizeInputProps}
         />
         <div className="showText">Rows per page</div>
       </SSpanPageSizeOptionsSelectWrapper>
